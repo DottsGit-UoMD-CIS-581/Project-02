@@ -429,7 +429,7 @@ class NNetGDOptimizer(NNetOptimizer):
 
 if __name__ == '__main__':
     # model_select is for debugging purposes. -1: all, 0: perceptron, 1: DNN, 2: DNN2
-    model_select = 2
+    model_select = 0
 
     D = np.loadtxt("./optdigits_train.dat") 
     D_test = np.loadtxt("./optdigits_test.dat")
@@ -466,6 +466,7 @@ if __name__ == '__main__':
         min_err = float('inf')
         perceptron_cv_errors = []
         for lr in learn_rates:
+            print(f'Learning rate: {lr}')
             perceptron_nnet = NNet(nunits=[n,K]) 
             kf = KFold(n_splits=3)
             cv_errs = []
@@ -483,6 +484,7 @@ if __name__ == '__main__':
                 best_lr = lr
         
         # CV error curve
+        print(f'Best learning rate: {best_lr}')
         print("Perceptron - Average CV Test Misclassification Errors:")
         print(perceptron_cv_errors)
 
